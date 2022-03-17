@@ -9,8 +9,8 @@ describe('validate()', () => {
     });
 
     it('Validar cadena valida', () => {
-        blockchain.addBlock('bl0ck-1');
-        blockchain.addBlock('bl0ck-2');
+        blockchain.addBlock('transact0');
+        blockchain.addBlock('transact1');
 
         expect(validate(blockchain.blocks)),toBe(true);
 
@@ -21,20 +21,20 @@ describe('validate()', () => {
 
         expect(() =>{
             validate(blockchain.blocks);
-        }).toThrowError('Genesis block invalido');
+        }).toThrowError('Bloque Genesis invalido');
     });
 
     it('Invalidar cadena con previousHash corrupto en un bloque', ()=> {
-        blockchain.addBlock('bl0ck-1');
+        blockchain.addBlock('transact2');
         blockchain.blocks[1].previousHash = 'h4ck-previousHash';
 
         expect(() =>{
             validate(blockchain.blocks);
-        }).toThrowError('PreviousHash block invalido');
+        }).toThrowError('El Previous Hash es invalido');
     });
 
     it('Invalidar cadena con Hash corrupto en un bloque', ()=> {
-        blockchain.addBlock('bl0ck-1');
+        blockchain.addBlock('transact3');
         blockchain.blocks[1].hash = 'h4ck-Hash';
 
         expect(() =>{
